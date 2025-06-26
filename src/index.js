@@ -1,5 +1,15 @@
 import { createItem } from './itemModule.js';
+import { createProject } from './projectModule.js';
+import "./styles.css";
 
-const item1 = createItem("Task 1", "Description", "📌", "2025-07-01", "high");
-console.log(item1.getTitle());
-item1.editTitle("Updated Task");
+const applicationModule = (function (){
+    let allTasks = [];
+    let allProjects = [];
+
+
+})();
+
+/*
+I will need the following:
+a quick way to figure out which tasks belong to which projects (filter)
+*/
