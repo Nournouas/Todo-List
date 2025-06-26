@@ -32,6 +32,7 @@ export function createDOM(){
 
     const projectButton = document.createElement("button");
     projectButton.classList.add("projectButton");
+    projectButton.classList.add("selected");
     projectButton.textContent = "All"
 
     projectDiv.appendChild(projectButton);
@@ -42,16 +43,27 @@ export function createDOM(){
     //------------------------
 };
 
-//function to populate projectsDiv
+//function to populate projectsDiv and all tasks into the grid (need to add the grid dom element + add task button, programm later)
 
-export function populateProjectsDiv(listOfProjects){
+export function populateWithProjects(listOfProjects, listOfTasks){
     const projectsDiv = document.querySelector(".projectsDiv");
+
+
+
     listOfProjects.forEach(project => {
         const projectButton = document.createElement("button");
         projectButton.classList.add("projectButton");
         projectButton.textContent = project.getTitle();
         projectsDiv.appendChild(projectButton);
     });
+
+
 }
+
+//function to add event listener to project buttons AKA SELECT PROJECT function populate tasks
+
+
+
+//function to add event listener AKA SELECT TASSSSK
 
 //function to take project and use it to populate the tasks

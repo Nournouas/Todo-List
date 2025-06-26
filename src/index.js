@@ -1,6 +1,6 @@
 import { createItem } from './itemModule.js';
 import { createProject } from './projectModule.js';
-import { createDOM, populateProjectsDiv } from './DOM.js';
+import { createDOM, populateWithProjects } from './DOM.js';
 import "./styles.css";
 
 const applicationModule = (function (){
@@ -10,7 +10,7 @@ const applicationModule = (function (){
     let allTasks = [];
     let allProjects = [project1, project2, project3];
     createDOM()
-    populateProjectsDiv(allProjects);
+    populateWithProjects(allProjects);
 
 })();
 
