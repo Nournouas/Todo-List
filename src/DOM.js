@@ -4,72 +4,66 @@ import userLogo from "./user-logo.png"
 
 export function createDOM(){
     //header ----
-    const header = document.createElement("header");
-    header.classList.add("header")
-
-    const logoImage = document.createElement("img");
-    logoImage.classList.add("logo")
-    logoImage.src = todoLogo;
-
-    const accountImage = document.createElement("img");
-    accountImage.classList.add("accImage")
-    accountImage.src = userLogo;
-
+    const header = createElement("header", "header", "none", "none", "none");
+    const logoImage = createElement("img", "logo", "none", "none", todoLogo);
+    const accountImage = createElement("img", "accImage", "none", "none", userLogo);
     header.appendChild(logoImage)
     header.appendChild(accountImage)
     //------------
 
     //-nav-------------------
-    const nav = document.createElement("nav");
-    nav.classList.add("nav");
+    const nav = createElement("nav", "nav", "none", "none", "none");
+    const projectHeader = createElement("h1", "projectHeader", "Projects", "none", "none");
+    const projectDiv = createElement("div", "projectsDiv", "none", "none", "none");
+    const addProjButton = createElement("button", "addProjButton", "Add New Project", "none", "none");;
+    addProjButton.addEventListener("click", ()=> showNewProjCard());
 
-    const projectHeader = document.createElement("h1");
-    projectHeader.textContent = "Projects:";
-    projectHeader.classList.add("projectHeader");
     nav.appendChild(projectHeader)
-
-    const projectDiv = document.createElement("div");
-    projectDiv.classList.add("projectsDiv");
     nav.appendChild(projectDiv);
-
-    const addProjButton = document.createElement("button");
-    addProjButton.textContent = "Add New Project";
-    addProjButton.addEventListener("click", ()=> addNewProjectDOM());
-    addProjButton.classList.add("addProjButton")
-
     nav.appendChild(addProjButton);
-    
-    document.body.appendChild(header);
-    document.body.appendChild(nav);
     //------------------------
 
     //card div ----
-
-    const cardGrid = document.createElement("div");
-    cardGrid.classList.add("cardGrid");
-
-    document.body.appendChild(cardGrid);
-
-
+    const cardGrid = createElement("div", "cardGrid", "none", "none", "none");
     //--------------
+
+    document.body.appendChild(header);
+    document.body.appendChild(nav);
+    document.body.appendChild(cardGrid);
 };
 
-//function to populate projectsDiv and all tasks into the grid (need to add the grid dom element + add task button, programm later)
 
-export function populateDOM(listOfProjects){
+function createElement(elementType, className = 'none', content = 'none', attributes = "none", imgSrc = "none",){
+    const element = document.createElement(elementType);
+    if (className != 'none'){
+        element.classList.add(className);
+    };
+    if (content != 'none'){
+        element.textContent = content;
+    };
+    if (attributes != 'none'){
+        for (let i = 0 ; i < attributes.length ; i++){
+            element.setAttribute(attributes[i][0], attributes[i][1]);
+        }
+    };
+    if (imgSrc != 'none' && elementType === "img"){
+        element.src = imgSrc;
+    };
+
+    return element;
+
+}
+
+
+//function to populate projectsDiv and all tasks into the grid (need to add the grid dom element + add task button, programm later)
+export function populateProjectsDiv(listOfProjects){
+
     const projectsDiv = document.querySelector(".projectsDiv");
+
     //this loop takes in each project and puts it on the project div, it also highlights the all button on the first launch
     listOfProjects.forEach(project => {
-        const projectButton = document.createElement("button");
-        projectButton.classList.add("projectButton");
-
-        projectButton.addEventListener("click", () => populateTasks(project))
-        
-        /*if (project.getTitle() === "All"){
-            projectButton.classList.add("selected");
-            populateTasks(project);
-        }*/
-        projectButton.textContent = project.getTitle();
+        const projectButton = createElement("button", "projectButton", project.getTitle(), "none", "none");;
+        projectButton.addEventListener("click", () => populateTasks(project));
         projectsDiv.appendChild(projectButton);
     });
 
@@ -77,97 +71,56 @@ export function populateDOM(listOfProjects){
 
 
 //function to add a new project
-function addNewProjectDOM(){
-        const nav = document.querySelector(".nav");
-    nav.classList.toggle("hidden")
+function showNewProjCard(){
 
+    //hide background elements ---
+    const nav = document.querySelector(".nav");
+    nav.classList.toggle("hidden")
     const cardgrid = document.querySelector(".cardGrid");
     cardgrid.classList.toggle("hidden")
+    //----------------------------
     
-    const newProjDiv = document.createElement("div");
-    newProjDiv.classList.add("newProjDiv")
+    const newProjDiv = createElement("div", "newProjDiv", "none", "none", "none");
+    const newProjForm = createElement("form", "newProjForm", "none", [["id", "addNewProjButton"]], "none");
 
-    const newProjForm = document.createElement("form");
-    newProjForm.classList.add("newProjForm")
-    //------------
-    const inputDiv1 = document.createElement("div");
-    inputDiv1.classList.add("inputDiv")
-
-    const inputTitle = document.createElement("input")
-    inputTitle.setAttribute("type", "text");
-    inputTitle.setAttribute("id", "inputTitle");
-
-    const titleLabel = document.createElement("label")
-    titleLabel.textContent = "Project title";
-    titleLabel.setAttribute("for", "inputTitle");
-
+    //------------Project title
+    const inputDiv1 = createElement("div", "inputDiv", "none", "none", "none");
+    const inputTitle = createElement("input", "none", "none", [["type", "text"],["id", "inputTitle"]], "none");
+    const titleLabel = createElement("label", "none", "Project title", [["for", "inputTitle"]], "none");
     inputDiv1.appendChild(titleLabel);
     inputDiv1.appendChild(inputTitle);
     newProjForm.appendChild(inputDiv1);
-    //------------
+    //--------------------------
 
-    //------------
-    const inputDiv2 = document.createElement("div");
-    inputDiv2.classList.add("inputDiv")
-
-    const inputColor = document.createElement("input")
-    inputColor.setAttribute("type", "color");
-    inputColor.setAttribute("id", "inputColor");
-
-    const colorLabel = document.createElement("label")
-    colorLabel.textContent = "Project Color";
-    colorLabel.setAttribute("for", "inputColor");
-
+    //------------Project Color
+    const inputDiv2 = createElement("div", "inputDiv", "none", "none", "none");
+    const inputColor = createElement("input", "none", "none", [["type", "color"],["id", "inputColor"]], "none");
+    const colorLabel = createElement("label", "none", "Project color", [["for", "inputColor"]], "none");
     inputDiv2.appendChild(colorLabel);
     inputDiv2.appendChild(inputColor);
     newProjForm.appendChild(inputDiv2);
-    //------------
+    //-------------------------
 
-    //------------
-    const inputDiv3 = document.createElement("div");
-    inputDiv3.classList.add("inputDiv")
-
-    const inputPrio = document.createElement("select")
-    inputPrio.setAttribute("id", "inputPrio");
-
-    const lowPrio = document.createElement("option")
-    lowPrio.textContent = "Low priority";
-    lowPrio.value = "low"
-
-    const midPrio = document.createElement("option")
-    midPrio.textContent = "Medium priority";
-    midPrio.value = "mid"
-
-    const highPrio = document.createElement("option")
-    highPrio.textContent = "High priority";
-    highPrio.value = "high"
-
+    //------------Project Priority
+    const inputDiv3 = createElement("div", "inputDiv", "none", "none", "none");
+    const inputPrio = createElement("select", "none", "none", [["id", "inputPrio"]], "none");
+    const lowPrio = createElement("option", "none", "Low priority", [["value", "Low"]], "none");
+    const midPrio = createElement("option", "none", "Medium priority", [["value", "Medium"]], "none");
+    const highPrio = createElement("option", "none", "High priority", [["value", "High"]], "none");
     inputPrio.appendChild(lowPrio);
     inputPrio.appendChild(midPrio);
     inputPrio.appendChild(highPrio);
-
-
-
-    const prioLabel = document.createElement("label")
-    prioLabel.textContent = "Project Priority";
-    prioLabel.setAttribute("for", "inputPrio");
-
+    const prioLabel = createElement("label", "none", "Project Priority", [["for", "inputPrio"]], "none");
     inputDiv3.appendChild(prioLabel);
     inputDiv3.appendChild(inputPrio);
     newProjForm.appendChild(inputDiv3);
     //------------
 
-    const submitButton = document.createElement("input")
     
-    submitButton.setAttribute("type", "submit");
-    submitButton.value = "Create New Project";
-    newProjForm.id = "addNewProjButton";
+    const submitButton = createElement("input", "none", "none", [["type", "submit"], ["value", "Create New Project"]], "none");
     newProjForm.appendChild(submitButton);
-
-    
     newProjDiv.appendChild(newProjForm);
     document.body.appendChild(newProjDiv);
-    
 }
 
 
