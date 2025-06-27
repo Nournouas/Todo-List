@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
 }
 
 .header{
@@ -88,4 +89,101 @@
 
 .projectButton:hover{
     background-color: rgb(110, 98, 98);
+}
+
+.cardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+    max-width: 100vw;
+    gap: 24px;
+    padding: 40px 10vw 40px 10vw;
+}
+
+.taskCard{
+    padding: 24px;
+    width: 100%;
+    max-width: 250px;
+    background-color: aliceblue;
+    border-radius: 12px;
+}
+
+.topDivTask{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 12px;
+    border-bottom: solid rgba(0, 0, 0, 0.176) 2px;
+    padding-bottom: 10px;
+}
+
+.botDivTask{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 12px;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+
+.topDivImage{
+    width: 25px;
+    height: 25px;
+}
+
+.addProjButton{
+
+    padding: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: rgb(32, 74, 159);
+    color: rgb(217, 217, 217);
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 25px;
+
+}
+
+.addProjButton:hover{
+    background-color: rgb(21, 47, 100);
+}
+
+body{
+    height: 100vh;
+    position: relative;
+}
+
+.newProjDiv{
+    padding: 25px;
+    background-color: rgb(215, 215, 215);
+    border-radius: 12px;
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+}
+
+.newProjForm{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 24px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.inputDiv{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+input{
+    max-width: 150px;
+    width: 100%;
+}
+
+.hidden{
+    display: none;
 }
